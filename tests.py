@@ -1,28 +1,20 @@
-"""
-tests.py
------------------------------------------------------------
-Pruebas de Pair Programming - 6 validaciones (True/False).
-Mapeo: HU-01 a HU-06 con sus respectivos métodos de test.
 
-Uso: python tests.py
------------------------------------------------------------
-"""
 from copy import deepcopy
 from logica import Programador, Tarea, Pareja, SesionPairProgramming
 
 
-# -----------------------------------------------------------
+
 # TEST 1 - HU-01: Formación de la pareja
-# -----------------------------------------------------------
+
 # Contexto XP: En el desarrollo ágil, el trabajo en pareja exige
 # exactamente DOS miembros y ambos deben estar presentes (activos).
 def test_pareja_formada(pareja):
     return len(pareja.miembros) == 2 and all(p.activo for p in pareja.miembros)
 
 
-# -----------------------------------------------------------
+
 # TEST 2 - HU-02: Asignación de roles
-# -----------------------------------------------------------
+
 # Contexto XP: Coexistencia obligatoria de un Conductor (escribe)
 # y un Navegante (revisa). No se permiten roles duplicados.
 def test_roles_assigned(pareja):
@@ -30,9 +22,7 @@ def test_roles_assigned(pareja):
     return roles.count("Conductor") == 1 and roles.count("Navegante") == 1
 
 
-# -----------------------------------------------------------
 # TEST 3 - HU-03: Rotación de roles
-# -----------------------------------------------------------
 # Contexto XP: Los roles deben intercambiarse periódicamente
 # para mantener el foco, evitar la fatiga y compartir conocimiento.
 def test_rotacion_roles(pareja_antes, pareja_despues):
@@ -40,27 +30,24 @@ def test_rotacion_roles(pareja_antes, pareja_despues):
             pareja_antes.miembros[1].rol == pareja_despues.miembros[0].rol)
 
 
-# -----------------------------------------------------------
 # TEST 4 - HU-04: Selección de la tarea
-# -----------------------------------------------------------
+
 # Contexto XP: Toda sesión productiva requiere un objetivo claro;
 # la pareja debe tener asignada una tarea activa y descrita.
 def test_tarea_asignada(sesion):
     return sesion.tarea is not None and sesion.tarea.descripcion != ""
 
 
-# -----------------------------------------------------------
 # TEST 5 - HU-05: Revisión continua del código
-# -----------------------------------------------------------
 # Contexto XP: El sistema debe permitir que el Navegante registre
 # y guarde observaciones en tiempo real sobre el código creado.
 def test_observaciones_registradas(sesion):
     return len(sesion.observaciones) >= 0 and sesion.permite_observaciones is True
 
 
-# -----------------------------------------------------------
+
 # TEST 6 - HU-06: Cierre e integración del código
-# -----------------------------------------------------------
+
 # Contexto XP: La sesión no se cierra formalmente sin antes realizar
 # commit y push local/remoto para asegurar la integración continua.
 def test_sesion_cerrada_con_commit(sesion):
